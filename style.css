@@ -14,6 +14,11 @@
 }
 
 @font-face {
+    font-family: gilroy-light;
+    src: url(./media/fonts/Gilroy-Light.ttf);
+}
+
+@font-face {
     font-family: sf-pro;
     src: url(./media/fonts/SF-Pro-Text-Bold.woff);
 }
@@ -39,6 +44,7 @@ header {
     height: 40px;
     width: auto;
     padding: 15px 40px;
+    transition: .5s;
 }
 
 .navLinks {
@@ -48,45 +54,68 @@ header {
     /* justify-content: space-around; */
 }
 
-.home:before {
+.home,
+.services,
+.myWork,
+.about {
+    transition: .5s;
+}
+
+.home:hover,
+.services:hover,
+.myWork:hover,
+.about:hover,
+.logoNav:hover {
+    cursor: pointer;
+    /* border-bottom: 1px solid #E3E3E3; */
+    transform: translateY(-15%);
+    opacity: .8;
+}
+
+.home-section::before {
     background-image: url(./media/backgrounds/mixing-table.jpg);
     content: "";
     background-position: 50%;
     background-size: cover;
+
     height: 100%;
     width: 100%;
     max-width: 100%;
     left: 0;
-    position: absolute;
     top: 0;
-    /* filter: blur(16px); */
     opacity: 0.2;
     z-index: -1;
+    position: absolute;
 }
 
-.home {
+/* filter: blur(3px); */
+/* background-size: auto; */
+
+.home-section {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    font-family: gilroy-regular;
+    font-family: gilroy-bold;
 }
 
 .logoMain {
     padding: 60px 0;
-    width: 80%;
+    width: 75%;
     height: auto;
+    max-width: 1200px;
 }
 
-h1 {
-
+.slogan {
+    font-family: gilroy-light;
     font-size: 2em;
     color: #E3E3E3;
 }
 
 .quote {
+    font-family: gilroy-light;
     border: 1px solid #fff;
-    font-size: 16px;
+    font-size: 18px;
     line-height: 1.31em;
     color: #000;
     padding: 15px 40px;
@@ -96,10 +125,90 @@ h1 {
     margin: 30px 10px;
     background-color: #fff;
     font-weight: 400;
+    transition: .5s;
+}
+
+.quote:hover {
+    background-color: transparent;
+    color: #fff;
+    cursor: pointer;
 }
 
 .arrowsDown {
-    padding: 30px 0;
+    padding-top: 30px;
+    padding-bottom: 50px;
     height: 50px;
     width: auto;
+}
+
+.services-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+}
+
+.services-header {
+    color: #3e3e3e;
+    /* color: red; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    padding: 50px 0;
+    gap: 40px;
+    font-family: gilroy-regular;
+}
+
+h1 {
+    /* font-family: Helvetica Arial, sans-serif; */
+    font-family: gilroy-bold;
+    letter-spacing: 3px;
+    font-size: 3em;
+}
+
+p {
+    font-family: gilroy-light;
+}
+
+.service-container {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+    max-width: 1200px;
+    padding-bottom: 50px;
+}
+
+.service-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+    width: 300px;
+    /* height: 350px; */
+    background-color: #f3f3f3;
+    box-shadow: 0px 14px 25px 0px rgba(0, 0, 0, 0.1331149193548387);
+    padding: 30px 55px;
+    border-radius: 10px;
+}
+
+.service-pic {
+    height: 60px;
+    width: auto;
+    background-color: black;
+}
+
+.service-title {
+    font-family: gilroy-regular;
+    font-size: 2.5em;
+}
+
+.service-text {
+    /* font-family: gilroy-light; */
+    font-size: 1.2em;
 }
