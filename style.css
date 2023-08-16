@@ -106,7 +106,7 @@ header>div {
     padding: 60px 0;
     width: 75%;
     height: auto;
-    max-width: 1200px;
+    max-width: 1400px;
 }
 
 .slogan {
@@ -160,7 +160,7 @@ header>div {
     justify-content: center;
     align-items: center;
     width: 50%;
-    max-width: 1200px;
+    max-width: 1400px;
     padding: 50px 0;
     gap: 40px;
     font-family: gilroy-regular;
@@ -183,7 +183,7 @@ p {
     align-items: center;
     gap: 20px;
     width: 100%;
-    max-width: 1200px;
+    max-width: 1400px;
     padding-bottom: 50px;
 }
 
@@ -223,11 +223,12 @@ p {
 }
 
 .home-section::before,
-.myWork-section::before {
+.myWork-section::before,
+.about-section::before {
     content: "";
     position: absolute;
-    top: 0;
-    left: 0;
+    /* top: 0;
+    left: 0; */
     width: 100%;
     height: 100%;
     background-size: cover;
@@ -246,6 +247,14 @@ p {
     background-image: url(./media/backgrounds/microphone.jpg);
 }
 
+.about-section::before {
+    background-image: url(./media/backgrounds/Background\ CD\ 3000.jpg);
+    filter: blur(12px);
+    opacity: 0.63;
+    background-size: 130% auto;
+    z-index: -2;
+}
+
 .myWork-section {
     position: relative;
     display: flex;
@@ -255,6 +264,7 @@ p {
     /* height: 300px; */
     width: 100%;
     color: #f3f3f3;
+    padding-bottom: 50px;
 }
 
 .myWork-title {
@@ -267,4 +277,202 @@ p {
     width: 65%;
     max-width: 1000px;
     font-family: gilroy-regular;
+    padding-bottom: 20px;
+}
+
+.about-section {
+    position: relative;
+    display: flex;
+    justify-content: flex-start;
+    /* color: #f3f3f3; */
+    /* height: 500px;
+    width: 500px; */
+}
+
+.about-bio {
+    width: 30%;
+    margin-left: 5rem;
+    margin-top: 5rem;
+    margin-bottom: 5rem;
+    /* fix this vvvv */
+    margin-left: 17%;
+    padding: 0 3%;
+    background-color: rgb(243, 243, 243, .8);
+    text-align: center;
+    box-shadow: 0px 14px 25px 0px rgba(0, 0, 0, 0.1331149193548387);
+    padding: 30px 55px;
+    border-radius: 10px;
+}
+
+.about-me {
+    font-family: gilroy-regular;
+    padding-top: 50px;
+    padding-bottom: 30px;
+}
+
+.about-bio>p {
+    padding-bottom: 50px;
+}
+
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        /* transform: translateY(20px); */
+    }
+
+    100% {
+        opacity: 1;
+        /* transform: translateY(0); */
+    }
+}
+
+@keyframes arrowBounce {
+
+    0%,
+    20%,
+    50%,
+    80%,
+    100% {
+        transform: translateY(0);
+    }
+
+    40% {
+        transform: translateY(30px);
+    }
+
+    60% {
+        transform: translateY(15px);
+    }
+
+}
+
+.logoMain,
+.slogan,
+.quote {
+    opacity: 0;
+    animation: fadeInUp 2s ease-out forwards;
+}
+
+.arrowsDown {
+    animation-name: arrowBounce;
+    animation-duration: 1.5s;
+    animation-iteration-count: infinite;
+}
+
+.contact-section {
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+form {
+    /* display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-wrap: nowrap; */
+    width: 70%;
+    max-width: 1400px;
+}
+
+.contact-header {
+    padding: 50px 0 20px 0;
+    text-align: center;
+}
+
+form,
+input,
+textarea {
+    margin: 0;
+    padding: 0;
+    border: none;
+    background: none;
+    font: inherit;
+    color: inherit;
+    outline: none;
+    box-sizing: border-box;
+}
+
+
+.input {
+    display: flex;
+    flex-direction: column;
+    /* border: 1px solid rgba(150, 150, 150, .3); */
+    margin: 20px 0;
+}
+
+input,
+textarea {
+    border: 1px solid rgba(150, 150, 150, .3);
+    border-radius: 3px;
+}
+
+.input input,
+.input textarea {
+    padding: 20px 20px;
+    font-size: 14px;
+    font-family: gilroy-light;
+}
+
+::placeholder {
+    font-family: gilroy-light;
+    color: rgb(161, 161, 161);
+}
+
+#message {
+    resize: vertical;
+    overflow: auto;
+    min-height: 100px;
+}
+
+input:not(:focus):not(:placeholder-shown):valid {
+    border-color: green;
+    border: 1px solid green;
+}
+
+input:not(:focus):not(:placeholder-shown):invalid {
+    border: 1px solid red;
+}
+
+
+
+button[type="submit"] {
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+    font-family: gilroy-regular;
+    font-size: 26px;
+    border-color: #000000;
+    background-color: rgba(239, 122, 71, 1);
+    color: #ffffff;
+    letter-spacing: 0px;
+    border-width: 0px;
+    padding: 21px 42px;
+    width: 100%;
+    max-width: 1400px;
+    border-radius: 9px;
+    margin-bottom: 20px;
+}
+
+button[type="submit"]:hover {
+    background-color: pink;
+    cursor: pointer;
+    /* Change the background color on hover */
+}
+
+
+
+@media screen and (max-height: 660px) {
+
+    /* Adjust the maximum height value as needed */
+    .home-section {
+        height: auto;
+        /* Let the content determine the height */
+    }
+
+    .home-section2 {
+        padding-bottom: 30px;
+        /* Add some spacing at the bottom */
+    }
 }
