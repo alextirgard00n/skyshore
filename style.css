@@ -163,8 +163,8 @@ header>div {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 50%;
-    max-width: 1400px;
+    width: 70%;
+    max-width: 1200px;
     padding: 50px 0;
     gap: 40px;
     font-family: gilroy-regular;
@@ -182,18 +182,19 @@ p {
 }
 
 .services-about {
-    font-size: 1.1em;
+    font-size: 17px;
     text-align: center;
 }
 
 .service-container {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 87px;
+    gap: 70px;
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 30px;
     padding-bottom: 50px;
+    margin-bottom: 80px;
 }
 
 .service-item {
@@ -201,17 +202,20 @@ p {
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    gap: 20px;
+    /* gap: 20px; */
+    height: 100%;
     background-color: #f3f3f3;
     box-shadow: 0px 14px 25px 0px rgba(0, 0, 0, 0.1331149193548387);
     padding: 30px 55px;
     border-radius: 10px;
+    text-align: center;
     /* transition: .5s; */
 }
 
 .service-pic {
-    height: 70px;
+    height: 60px;
     width: auto;
+    filter: invert(39%) sepia(91%) saturate(393%) hue-rotate(136deg) brightness(93%) contrast(91%);
     /* background-color: black; */
 }
 
@@ -276,7 +280,7 @@ p {
 }
 
 .elfsight-app-12a65d0f-2437-4e46-befc-85e6356a60a3 {
-    width: 65%;
+    width: 90%;
     max-width: 1000px;
     font-family: gilroy-regular;
     padding-bottom: 20px;
@@ -298,7 +302,7 @@ p {
     margin-bottom: 5rem;
     /* fix this vvvv */
     margin-left: 17%;
-    padding: 0 3%;
+    /* padding: 0 3%; */
     background-color: rgb(243, 243, 243, .8);
     text-align: center;
     box-shadow: 0px 14px 25px 0px rgba(0, 0, 0, 0.1331149193548387);
@@ -382,6 +386,8 @@ form {
 .contact-header {
     padding: 50px 0 20px 0;
     text-align: center;
+    font-size: 32px;
+    font-family: gilroy-regular;
 }
 
 form,
@@ -480,12 +486,11 @@ button[type="submit"]:hover {
     }
 }
 
-@media (max-width:850px) and (max-height: 910px) {
+/* @media (max-width:850px) and (max-height: 910px) {
     .home-section {
         height: auto;
-        /* Let the content determine the height */
     }
-}
+} */
 
 @media (max-width: 850px) {
     .logoMain {
@@ -497,5 +502,64 @@ button[type="submit"]:hover {
         width: 60%;
         height: auto;
         padding: 60px 0;
+    }
+}
+
+/* tablet */
+@media (max-width: 768px) {
+
+    .services-header {
+        width: 100%;
+        padding: 30px 0;
+        gap: 20px;
+    }
+
+    h1 {
+        font-size: 27px;
+        /* font-family: gilroy-bold; */
+    }
+
+    .services-about {
+        padding: 0 30px;
+    }
+
+    .service-container {
+        gap: 50px;
+        padding: 0 30px;
+    }
+
+    .service-title {
+        font-size: 27px;
+    }
+
+    .service-text {
+        font-size: 18px;
+        padding-bottom: 5px;
+    }
+}
+
+@media (max-width: 650px) {
+
+    header {
+        display: none;
+    }
+
+    /* .elfsight-app-12a65d0f-2437-4e46-befc-85e6356a60a3 {
+        width: 100%;
+        padding: 30px 55px;
+    } */
+
+    .elfsight-app-12a65d0f-2437-4e46-befc-85e6356a60a3 {
+        display: none;
+    }
+
+    .service-item {
+        /* display: none; */
+        padding: 30px 15px;
+    }
+
+    .service-container {
+        grid-template-columns: repeat(1, 1fr);
+        gap: 110px;
     }
 }
