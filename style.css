@@ -46,7 +46,7 @@ header>div {
     font-family: gilroy-regular;
     display: flex;
     justify-content: space-between;
-    height: 90px;
+    height: 80px;
     max-width: 1440px;
     width: 100%;
     color: #E3E3E3;
@@ -56,7 +56,7 @@ header>div {
 .logoNav {
     height: 40px;
     width: auto;
-    padding: 15px 40px;
+    padding: 0 40px;
     transition: .5s;
 }
 
@@ -92,7 +92,7 @@ header>div {
     justify-content: space-between;
     align-items: center;
     font-family: gilroy-bold;
-    height: calc(100vh - 90px);
+    height: calc(100vh - 80px);
     /* fills entire viewport */
 }
 
@@ -280,19 +280,17 @@ p {
 }
 
 .elfsight-app-12a65d0f-2437-4e46-befc-85e6356a60a3 {
-    width: 90%;
+    /* width: 90%; */
+    width: 100%;
     max-width: 1000px;
     font-family: gilroy-regular;
-    padding-bottom: 20px;
+    /* padding-bottom: 20px; */
 }
 
 .about-section {
     position: relative;
     display: flex;
     justify-content: flex-start;
-    /* color: #f3f3f3; */
-    /* height: 500px;
-    width: 500px; */
 }
 
 .about-bio {
@@ -379,8 +377,8 @@ form {
     flex-direction: column;
     align-items: center;
     flex-wrap: nowrap; */
-    width: 70%;
-    max-width: 1400px;
+    width: 80%;
+    max-width: 1000px;
 }
 
 .contact-header {
@@ -526,6 +524,7 @@ button[type="submit"]:hover {
     .service-container {
         gap: 50px;
         padding: 0 30px;
+        padding-bottom: 30px;
     }
 
     .service-title {
@@ -536,8 +535,19 @@ button[type="submit"]:hover {
         font-size: 18px;
         padding-bottom: 5px;
     }
+
+    form {
+        width: 100%;
+        padding: 0 30px;
+    }
+
+    .contact-header {
+        font-size: 27px;
+    }
 }
 
+
+/* vertical service icons */
 @media (max-width: 650px) {
 
     header {
@@ -550,7 +560,7 @@ button[type="submit"]:hover {
     } */
 
     .elfsight-app-12a65d0f-2437-4e46-befc-85e6356a60a3 {
-        display: none;
+        /* display: none; */
     }
 
     .service-item {
