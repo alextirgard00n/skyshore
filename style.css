@@ -192,10 +192,11 @@ p {
     grid-template-columns: repeat(2, 1fr);
     gap: 70px;
     max-width: 1200px;
-    margin: 0 auto;
+    /* margin: 0 auto; */
     padding: 0 30px;
-    padding-bottom: 100px;
-    /* margin-bottom: 80px; */
+    padding-bottom: 50px;
+    align-content: stretch;
+    /* Make grid items fill the entire height */
 }
 
 .service-item {
@@ -203,14 +204,12 @@ p {
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    /* gap: 20px; */
-    height: 100%;
     background-color: #f3f3f3;
     box-shadow: 0px 14px 25px 0px rgba(0, 0, 0, 0.1331149193548387);
     padding: 30px 55px;
     border-radius: 10px;
     text-align: center;
-    /* transition: .5s; */
+    gap: 15px;
 }
 
 .service-pic {
@@ -305,7 +304,10 @@ p {
     /* padding: 0 3%; */
     background-color: rgb(243, 243, 243, .8);
     text-align: center;
-    box-shadow: 0px 14px 25px 0px rgba(0, 0, 0, 0.1331149193548387);
+    /* box-shadow: 0px 14px 25px 0px rgba(0, 0, 0, 0.1331149193548387); */
+    -webkit-box-shadow: rgba(0, 0, 0, 0.3) 0 1px 3px;
+    -moz-box-shadow: rgba(0, 0, 0, 0.3) 0 1px 3px;
+    box-shadow: rgba(0, 0, 0, 0.3) 0 1px 3px;
     padding: 30px 55px;
     border-radius: 10px;
 }
@@ -525,9 +527,11 @@ button[type="submit"]:hover {
 
     .service-container {
         gap: 50px;
-        padding: 0 30px;
-        /* padding-bottom: 30px; */
-        padding-bottom: 100px;
+        padding-bottom: 40px;
+    }
+
+    .service-item {
+        gap: 10px;
     }
 
     .service-title {
@@ -563,11 +567,12 @@ button[type="submit"]:hover {
     }
 
     .service-item {
-        padding: 30px 15px;
+        padding: 30px 20px;
+        gap: 0;
     }
 
     .service-container {
         grid-template-columns: repeat(1, 1fr);
-        gap: 110px;
+        gap: 35px;
     }
 }
