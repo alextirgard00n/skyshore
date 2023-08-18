@@ -92,7 +92,8 @@ header>div {
     justify-content: space-between;
     align-items: center;
     font-family: gilroy-bold;
-    height: calc(100vh - 80px);
+    /* height: calc(100vh - 80px); */
+    min-height: calc(100vh - 80px);
     /* fills entire viewport */
 }
 
@@ -193,8 +194,8 @@ p {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 30px;
-    padding-bottom: 50px;
-    margin-bottom: 80px;
+    padding-bottom: 100px;
+    /* margin-bottom: 80px; */
 }
 
 .service-item {
@@ -281,9 +282,10 @@ p {
 
 .elfsight-app-12a65d0f-2437-4e46-befc-85e6356a60a3 {
     /* width: 90%; */
-    width: 100%;
+    width: 94%;
     max-width: 1000px;
     font-family: gilroy-regular;
+    /* padding: 0 30px; */
     /* padding-bottom: 20px; */
 }
 
@@ -524,7 +526,8 @@ button[type="submit"]:hover {
     .service-container {
         gap: 50px;
         padding: 0 30px;
-        padding-bottom: 30px;
+        /* padding-bottom: 30px; */
+        padding-bottom: 100px;
     }
 
     .service-title {
@@ -534,6 +537,11 @@ button[type="submit"]:hover {
     .service-text {
         font-size: 18px;
         padding-bottom: 5px;
+    }
+
+    .elfsight-app-12a65d0f-2437-4e46-befc-85e6356a60a3 {
+        width: 93%;
+        /* display: none; */
     }
 
     form {
@@ -554,17 +562,7 @@ button[type="submit"]:hover {
         display: none;
     }
 
-    /* .elfsight-app-12a65d0f-2437-4e46-befc-85e6356a60a3 {
-        width: 100%;
-        padding: 30px 55px;
-    } */
-
-    .elfsight-app-12a65d0f-2437-4e46-befc-85e6356a60a3 {
-        /* display: none; */
-    }
-
     .service-item {
-        /* display: none; */
         padding: 30px 15px;
     }
 
