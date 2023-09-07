@@ -11,7 +11,7 @@ function sendMail(e) {
         console.log("FILL IT OUT");
         return;
     }
-
+    // submitBtn.value = 'Sending...';
     console.log(params);
 
     const serviceID = "service_lirdqis";

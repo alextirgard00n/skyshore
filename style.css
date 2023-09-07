@@ -408,15 +408,7 @@ p {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-}
-
-form {
-    /* display: flex;
-    flex-direction: column;
-    align-items: center;
-    flex-wrap: nowrap; */
-    width: 80%;
-    max-width: 1000px;
+    padding-bottom: 50px;
 }
 
 .contact-header {
@@ -437,6 +429,16 @@ textarea {
     color: inherit;
     outline: none;
     box-sizing: border-box;
+}
+
+form {
+    /* display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-wrap: nowrap; */
+    width: 100%;
+    max-width: 1000px;
+    padding: 0 30px;
 }
 
 
@@ -506,6 +508,12 @@ button[type="submit"]:hover {
     background-color: #13656b;
     cursor: pointer;
     /* Change the background color on hover */
+}
+
+footer {
+    height: 120px;
+    width: 100%;
+    background-color: #1B1B1B;
 }
 
 
@@ -593,10 +601,10 @@ button[type="submit"]:hover {
         /* display: none; */
     }
 
-    form {
+    /* form {
         width: 100%;
         padding: 0 30px;
-    }
+    } */
 
     .contact-header {
         font-size: 27px;
