@@ -31,26 +31,44 @@ body {
 }
 
 header {
-    /* position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 1; */
     background-color: #1B1B1B;
+    opacity: .9;
+    /* background-color: red; */
     width: 100%;
     display: flex;
     justify-content: center;
-    /* display: flex; */
+    align-items: center;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    transition: top 0.3s;
+    height: 80px;
+    z-index: 1;
+}
+
+header.scrolled {
+    position: fixed;
+    top: 80px;
+    background-color: #1B1B1B;
+    /* Background color for the scrolled state */
+    transition: top .3s ease-in-out, background-color 0.3s ease-in-out;
+    z-index: 999;
+    transform: translateY(-80px);
 }
 
 header>div {
     font-family: gilroy-regular;
     display: flex;
     justify-content: space-between;
+    align-items: center;
     height: 80px;
     max-width: 1440px;
     width: 100%;
     color: #E3E3E3;
     font-size: 18px;
+
 }
 
 .logoNav {
@@ -62,27 +80,57 @@ header>div {
 
 .navLinks {
     display: flex;
-    padding: 0 40px;
-    gap: 30px;
+    align-items: center;
+    /* padding: 0 40px; */
+    gap: 40px;
     /* justify-content: space-around; */
 }
 
 .home,
 .services,
 .myWork,
+.about,
+.contact {
+    /* color: #9f96a8; */
+    font-size: 18px;
+    letter-spacing: 1px;
+    text-decoration: none;
+    color: #E3E3E3;
+    transition: .5s;
+    /* opacity: .7; */
+    /* font-size: 18px; */
+}
+
+.contact {
+    padding-right: 40px;
+}
+
+.list-item {
+    width: 1px;
+    height: 22px;
+    background-color: #E3E3E3;
+    /* margin-left: 15px; */
+    /* margin-right: 15px; */
+}
+
+/* .home,
+.services,
+.myWork,
 .about {
     transition: .5s;
-}
+} */
 
 .home:hover,
 .services:hover,
 .myWork:hover,
 .about:hover,
-.logoNav:hover {
+.logoNav:hover,
+.contact:hover {
     cursor: pointer;
+    color: white;
     /* border-bottom: 1px solid #E3E3E3; */
-    transform: translateY(-15%);
-    opacity: .8;
+    transform: translateY(-5%);
+    opacity: 1;
 }
 
 .home-section {
@@ -93,7 +141,8 @@ header>div {
     align-items: center;
     font-family: gilroy-bold;
     /* height: calc(100vh - 80px); */
-    min-height: calc(100vh - 80px);
+    /* min-height: calc(100vh - 80px); */
+    min-height: 100vh;
     /* fills entire viewport */
 }
 
@@ -129,6 +178,7 @@ header>div {
 }
 
 .quote {
+    text-decoration: none;
     font-family: gilroy-light;
     border: 1px solid #fff;
     font-size: 18px;
@@ -149,6 +199,16 @@ header>div {
     color: #fff;
     cursor: pointer;
 }
+
+.buttonContainer {
+    padding-right: 40px;
+}
+
+/* .navQuote {
+    padding: 15px 30px;
+    margin: 0;
+    font-size: 30px;
+} */
 
 .arrowsDown {
     padding-top: 30px;
@@ -507,7 +567,6 @@ button[type="submit"] {
 button[type="submit"]:hover {
     background-color: #13656b;
     cursor: pointer;
-    /* Change the background color on hover */
 }
 
 footer {
@@ -515,6 +574,41 @@ footer {
     width: 100%;
     background-color: #1B1B1B;
 }
+
+.scrollContainer {
+    width: 53px;
+    height: 53px;
+    text-align: center;
+    background: #2f323a;
+    opacity: 0;
+    border-radius: 50%;
+    text-decoration: none;
+    position: fixed;
+    bottom: 40px;
+    right: 40px;
+    pointer-events: none;
+    z-index: 999;
+    line-height: 48px;
+    -webkit-transition: opacity .3s ease;
+    -moz-transition: opacity .3s ease;
+    transition: opacity .3s ease;
+    font-size: 24px;
+    color: #E3E3E3;
+}
+
+.scrollContainer:hover {
+    opacity: 1;
+}
+
+.visibleElement {
+    pointer-events: all;
+    opacity: .7;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.scrolled {}
+
+
 
 
 
@@ -608,6 +702,15 @@ footer {
 
     .contact-header {
         font-size: 27px;
+    }
+
+    .scrollContainer {
+        bottom: 10px;
+        right: 10px;
+        width: 55px;
+        height: 55px;
+        /* transition: opacity 0.5s ease-in-out; */
+        /* line-height: 53px; */
     }
 }
 
