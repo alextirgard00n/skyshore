@@ -1,6 +1,5 @@
 //scroll link elements
 document.addEventListener("DOMContentLoaded", function () {
-    // Select all anchor links with hash (#) in their href attribute
     const scrollLinks = document.querySelectorAll('a[href^="#"]');
 
     for (const scrollLink of scrollLinks) {
@@ -12,7 +11,8 @@ document.addEventListener("DOMContentLoaded", function () {
         const targetId = this.getAttribute("href").substring(1);
         const targetElement = document.getElementById(targetId);
         if (targetElement) {
-            const offset = targetElement.getBoundingClientRect().top + window.scrollY;
+            const headerHeight = document.querySelector("header").offsetHeight;
+            const offset = targetElement.getBoundingClientRect().top + window.scrollY - headerHeight;
             window.scrollTo({
                 top: offset,
                 behavior: "smooth"
