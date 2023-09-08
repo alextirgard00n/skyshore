@@ -86,6 +86,10 @@ header>div {
     /* justify-content: space-around; */
 }
 
+.hamburgerNavLinks {
+    display: none;
+}
+
 .home,
 .services,
 .myWork,
@@ -155,6 +159,7 @@ header>div {
 
 .logoMain {
     padding: 60px 0;
+    padding-top: 90px;
     width: 75%;
     height: auto;
     max-width: 1400px;
@@ -162,6 +167,7 @@ header>div {
 
 .logoMainVetical {
     display: none;
+    padding-top: 90px;
 }
 
 .slogan,
@@ -606,8 +612,6 @@ footer {
     transition: opacity 0.5s ease-in-out;
 }
 
-.scrolled {}
-
 
 
 
@@ -642,6 +646,7 @@ footer {
         width: 60%;
         height: auto;
         padding: 60px 0;
+        padding-top: 90px;
     }
 }
 
@@ -718,9 +723,9 @@ footer {
 /* vertical service icons */
 @media (max-width: 650px) {
 
-    header {
+    /* header {
         display: none;
-    }
+    } */
 
     .service-item {
         padding: 30px 20px;
@@ -742,4 +747,88 @@ footer {
         display: block;
         padding-bottom: 10px;
     }
+}
+
+
+
+
+
+/* Initially hide the navLinks on small screens */
+.hamburgerNav {
+    display: none;
+}
+
+/* Style for the hamburger button */
+.hamburger {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.hamburger .bar {
+    width: 30px;
+    height: 3px;
+    background-color: #fff;
+    margin: 6px 0;
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+/* Media query for smaller screens */
+@media (max-width: 768px) {
+
+    .navLinks {
+        display: none;
+    }
+
+    .hamburgerNav {
+        display: block;
+    }
+
+    .hamburgerNavLinks {
+        /* display: flex; */
+        flex-direction: column;
+        align-items: center;
+        background-color: #1B1B1B;
+
+        position: absolute;
+        /* height: calc(100vh - 80px); */
+        top: 80px;
+        left: 0;
+        right: 0;
+        backdrop-filter: blur(10px);
+        /* Adjust the blur amount as needed */
+        opacity: 1;
+
+
+    }
+}
+
+.hamburgerNavLinks.active {
+    display: flex;
+}
+
+.hamburger {
+    display: block;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 2;
+}
+
+.hamburger.active .bar:nth-child(1) {
+    transform: rotate(45deg) translate(3px, 3px);
+}
+
+.hamburger.active .bar:nth-child(2) {
+    transform: rotate(-45deg) translate(3px, -3px);
+}
+
+.hamburger.active .bar:nth-child(3) {
+    opacity: 0;
+}
+
+
+.hamburgerNavLinks a {
+    padding: 20px 0;
 }
