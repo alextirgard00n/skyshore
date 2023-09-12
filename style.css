@@ -390,15 +390,6 @@ p {
     padding: 90px 0;
 }
 
-/* .about-picture {
-    padding-top: 80px;
-    width: auto;
-    height: 800px;
-    border-radius: 10px;
-    padding-top: 80px;
-    margin: 0 30px;
-} */
-
 
 .about-content {
     display: flex;
@@ -411,14 +402,9 @@ p {
 
 .about-bio {
     align-self: center;
-
-    /* max-height: 800px; */
-    /* min-width: 350px; */
     width: 50%;
-    /* max-width: 800px; */
     background-color: rgb(243, 243, 243, .8);
     text-align: center;
-    /* box-shadow: 0px 14px 25px 0px rgba(0, 0, 0, 0.1331149193548387); */
     -webkit-box-shadow: rgba(0, 0, 0, 0.3) 0 1px 3px;
     -moz-box-shadow: rgba(0, 0, 0, 0.3) 0 1px 3px;
     box-shadow: rgba(0, 0, 0, 0.3) 0 1px 3px;
@@ -607,17 +593,6 @@ footer>p>a {
     color: #E3E3E3;
 }
 
-/* .fa-github {
-    color: #E3E3E3;
-    font-size: 23px;
-    padding-left: 15px;
-    transition: transform 0.3s ease;
-}
-
-.fa-github:hover {
-    transform: scale(1.4);
-} */
-
 .scrollContainer {
     width: 53px;
     height: 53px;
@@ -659,11 +634,6 @@ footer>p>a {
     .home-section {
         height: auto;
         /* Let the content determine the height */
-    }
-
-    .home-section2 {
-        /* padding-bottom: 30px; */
-        /* Add some spacing at the bottom */
     }
 }
 
@@ -710,9 +680,9 @@ footer>p>a {
         padding-bottom: 40px;
     }
 
-    .service-item {
-        /* gap: 10px; */
-    }
+    /* .service-item {
+        gap: 10px;
+    } */
 
     .service-title {
         font-size: 27px;
@@ -734,13 +704,7 @@ footer>p>a {
     .music-player {
         width: 93%;
         padding-bottom: 0;
-        /* display: none; */
     }
-
-    /* form {
-        width: 100%;
-        padding: 0 30px;
-    } */
 
     .contact-header {
         font-size: 27px;
@@ -751,8 +715,6 @@ footer>p>a {
         right: 10px;
         width: 55px;
         height: 55px;
-        /* transition: opacity 0.5s ease-in-out; */
-        /* line-height: 53px; */
     }
 
     .about-container2 {
