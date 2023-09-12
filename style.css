@@ -45,7 +45,7 @@ header {
     width: 100%;
     transition: top 0.3s;
     height: 80px;
-    z-index: 1;
+    z-index: 2;
 }
 
 header.scrolled {
@@ -54,7 +54,6 @@ header.scrolled {
     background-color: #1B1B1B;
     /* Background color for the scrolled state */
     transition: top .3s ease-in-out, background-color 0.3s ease-in-out;
-    z-index: 999;
     transform: translateY(-80px);
 }
 
@@ -68,7 +67,6 @@ header>div {
     width: 100%;
     color: #E3E3E3;
     font-size: 18px;
-
 }
 
 .logoNav {
@@ -219,7 +217,7 @@ header>div {
 .arrowsDown {
     padding-top: 30px;
     padding-bottom: 60px;
-    height: 50px;
+    height: 40px;
     width: auto;
 }
 
@@ -575,11 +573,32 @@ button[type="submit"]:hover {
     cursor: pointer;
 }
 
-footer {
-    height: 120px;
-    width: 100%;
-    background-color: #1B1B1B;
+.footer {
+    opacity: .85;
+    /* margin-top: auto; */
+    padding: 40px 0;
+    display: flex;
+    justify-content: center;
+    font-size: 16px;
+    transition: .2s;
+    color: #E3E3E3;
 }
+
+footer>p>a {
+    text-decoration: none;
+    color: #E3E3E3;
+}
+
+/* .fa-github {
+    color: #E3E3E3;
+    font-size: 23px;
+    padding-left: 15px;
+    transition: transform 0.3s ease;
+}
+
+.fa-github:hover {
+    transform: scale(1.4);
+} */
 
 .scrollContainer {
     width: 53px;
@@ -790,26 +809,30 @@ footer {
     }
 
     .hamburgerNavLinks {
-        /* display: flex; */
+        display: flex;
         flex-direction: column;
         align-items: center;
         background-color: #1B1B1B;
 
         position: absolute;
         /* height: calc(100vh - 80px); */
-        top: 80px;
+        /* top: 80px; */
+        top: -400px;
         left: 0;
         right: 0;
         backdrop-filter: blur(10px);
         /* Adjust the blur amount as needed */
-        opacity: 1;
-
-
+        /* opacity: 1; */
+        transition: .4s ease-in-out;
+        z-index: -2;
     }
 }
 
 .hamburgerNavLinks.active {
-    display: flex;
+    /* display: flex; */
+    top: 80px;
+    z-index: -20;
+    /* transition: 1s; */
 }
 
 .hamburger {
