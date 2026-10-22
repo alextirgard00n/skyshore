@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- <title>Skyshore Recordings</title> -->
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="music-player.css">
 
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-5PVNTKE5KR"></script>
@@ -162,8 +163,27 @@
 
         <div class="myWork-section" id="myWork">
             <h1 class="myWork-title">My Work</h1>
-            <script src="https://static.elfsight.com/platform/platform.js" data-use-service-core defer></script>
-            <div class="elfsight-app-12a65d0f-2437-4e46-befc-85e6356a60a3 music-player"></div>
+            <!-- Self-hosted player: edit the track list below. Put audio files in media/audio/ -->
+            <div class="sk-player" data-sk-player>
+                <script type="application/json">
+                    [
+                        { "title": "Dungblaster", "artist": "Reamped, Mixed, Mastered",
+                          "src": "media/audio/dungblaster.mp3", "cover": "media/covers/dungblaster.jpg" },
+                        { "title": "Spiritbox", "artist": "Reamped, Mixed, Mastered",
+                          "src": "media/audio/spiritbox.mp3", "cover": "media/covers/spiritbox.jpg" },
+                        { "title": "Skylene", "artist": "Reamped, Mixed, Mastered",
+                          "src": "media/audio/skylene.mp3", "cover": "media/covers/skylene.jpg" },
+                        { "title": "I, Assailant", "artist": "Reamped, Mixed, Mastered",
+                          "src": "media/audio/i-assailant.mp3", "cover": "media/covers/i-assailant.jpg" },
+                        { "title": "Sentinel", "artist": "Reamped, Mixed, Mastered",
+                          "src": "media/audio/sentinel.mp3", "cover": "media/covers/sentinel.jpg" },
+                        { "title": "Alchemy Index", "artist": "Reamped, Mixed, Mastered",
+                          "src": "media/audio/alchemy-index.mp3", "cover": "media/covers/alchemy-index.jpg" },
+                        { "title": "Stand Alone Complex", "artist": "Reamped, Mixed, Mastered",
+                          "src": "media/audio/stand-alone-complex.mp3", "cover": "media/covers/stand-alone-complex.jpg" }
+                    ]
+                </script>
+            </div>
         </div>
 
         <div class="about-section" id="about">
@@ -251,6 +271,7 @@
 
     <script src="app.js"></script>
     <script src="scroll.js"></script>
+    <script src="music-player.js" defer></script>
 </body>
 
 </html>
