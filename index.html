@@ -20,7 +20,7 @@
 
     <link rel="icon" type="image/x-icon" href="./media/logo/favicon.ico">
 
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3.12.1/dist/email.min.js"></script>
     <script type="text/javascript">
         (function () {
             emailjs.init("n62Zq_2oUHH99CvCd");
@@ -230,22 +230,29 @@
 
         <div class="contact-section" id="contact">
 
-            <form action="#">
+            <form id="contactForm" action="#" novalidate>
                 <h1 class="contact-header">Let's chat about your project!</h1>
                 <div class="input">
-                    <!-- <label for="name">Your name</label> -->
-                    <input type="text" name="name" id="name" required placeholder="Your Name">
-                    <!-- <span></span> -->
+                    <input type="text" name="name" id="name" required maxlength="100" autocomplete="name"
+                        placeholder="Your Name" aria-label="Your name">
                 </div>
 
                 <div class="input">
-                    <input type="email" name="email" id="email" required placeholder="Your Email Address">
-                    <!-- <span id="validX"></span> -->
+                    <input type="email" name="email" id="email" required maxlength="150" autocomplete="email"
+                        placeholder="Your Email Address" aria-label="Your email address">
                 </div>
                 <div class="input">
-                    <textarea id="message" name="message" placeholder="Message" required></textarea>
+                    <textarea id="message" name="message" placeholder="Message" required maxlength="5000"
+                        aria-label="Message"></textarea>
                 </div>
 
+                <!-- Spam trap: hidden from people, bots fill it in -->
+                <div class="form-trap" aria-hidden="true">
+                    <label for="website">Leave this empty</label>
+                    <input type="text" name="website" id="website" tabindex="-1" autocomplete="off">
+                </div>
+
+                <p class="form-status" role="status" aria-live="polite" hidden></p>
 
                 <button class="submitBtn" type="submit">Send Now</button>
             </form>
@@ -270,6 +277,7 @@
     </main>
 
     <script src="app.js"></script>
+    <script src="contact-form.js"></script>
     <script src="scroll.js"></script>
     <script src="music-player.js" defer></script>
 </body>
