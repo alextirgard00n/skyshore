@@ -1,0 +1,424 @@
+/* ===== Skyshore music player (self-hosted replacement for the Elfsight widget) =====
+ *
+ * Three layouts, switched on the player's own width (like Elfsight does):
+ *   600px and up  -> 168px cover beside the controls
+ *   441 - 599px   -> compact: 48px cover beside the title, controls full width
+ *   440px and down -> stacked: full-width cover on top
+ * Measurements were taken from the Elfsight widget on skyshorerecordings.com.
+ */
+
+.sk-player {
+    --sk-text: #f3f3f3;
+    --sk-dim: rgba(243, 243, 243, .7);
+    --sk-faint: rgba(243, 243, 243, .3);
+    --sk-track: rgba(255, 255, 255, .2);
+    --sk-buffer: rgba(255, 255, 255, .25);
+    --sk-row: rgba(255, 255, 255, .06);
+    --sk-accent: #24B4BD;
+
+    container-type: inline-size;
+    width: 93%;
+    max-width: 1200px;
+    margin: 0 auto;
+    box-sizing: border-box;
+    color: var(--sk-text);
+    font-family: gilroy-regular, Helvetica, Arial, sans-serif;
+}
+
+.sk-player *,
+.sk-player *::before,
+.sk-player *::after {
+    box-sizing: border-box;
+    margin: 0;
+}
+
+.sk-inner {
+    padding: 0 20px;
+}
+
+/* ---------- now playing ---------- */
+.sk-now {
+    display: grid;
+    grid-template-columns: 168px minmax(0, 1fr);
+    column-gap: 20px;
+    align-items: start;
+}
+
+.sk-cover {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    border-radius: 4px;
+    background: #2a2a2a center / cover no-repeat;
+    position: relative;
+    overflow: hidden;
+}
+
+.sk-cover.sk-cover--empty::after {
+    content: "";
+    position: absolute;
+    inset: 32%;
+    background: url("./media/logo/logo only white.png") center / contain no-repeat;
+    opacity: .35;
+}
+
+.sk-main {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    padding-top: 15px;
+}
+
+.sk-info { min-width: 0; }
+
+.sk-title {
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 19.5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.sk-artist {
+    color: var(--sk-dim);
+    font-size: 13px;
+    line-height: 17px;
+    margin-top: 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* ---------- progress ---------- */
+.sk-times {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 25px;
+    font-size: 12px;
+    line-height: 14px;
+    color: var(--sk-dim);
+    font-variant-numeric: tabular-nums;
+}
+
+.sk-bar {
+    position: relative;
+    height: 6px;
+    cursor: pointer;
+    touch-action: none;
+    display: flex;
+    align-items: center;
+}
+
+/* bigger invisible hit area for the thin bar */
+.sk-bar::before {
+    content: "";
+    position: absolute;
+    inset: -8px 0;
+}
+
+.sk-bar-track {
+    position: relative;
+    width: 100%;
+    height: 4px;
+    border-radius: 2px;
+    background: var(--sk-track);
+    overflow: hidden;
+}
+
+.sk-bar-buffer,
+.sk-bar-fill {
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 0;
+}
+
+.sk-bar-buffer { background: var(--sk-buffer); }
+.sk-bar-fill { background: var(--sk-accent); }
+
+.sk-bar:focus-visible {
+    outline: 2px solid var(--sk-accent);
+    outline-offset: 4px;
+    border-radius: 4px;
+}
+
+/* ---------- controls ---------- */
+.sk-controls {
+    display: flex;
+    align-items: center;
+    margin-top: 16px;
+    height: 40px;
+}
+
+.sk-spacer { flex: 1; }
+
+.sk-btn {
+    appearance: none;
+    border: 0;
+    background: none;
+    color: var(--sk-text);
+    cursor: pointer;
+    display: grid;
+    place-items: center;
+    width: 24px;
+    height: 40px;
+    padding: 0;
+    border-radius: 4px;
+    transition: opacity .2s, transform .1s;
+}
+
+.sk-btn:hover { opacity: .75; }
+.sk-btn:active { transform: scale(.92); }
+.sk-btn:disabled { color: var(--sk-faint); cursor: default; }
+.sk-btn:disabled:hover { opacity: 1; }
+
+.sk-btn:focus-visible {
+    outline: 2px solid var(--sk-accent);
+    outline-offset: 1px;
+}
+
+.sk-btn svg { fill: currentColor; display: block; }
+
+/* transport: same shapes and spacing as the Elfsight player */
+.sk-prev svg,
+.sk-next svg { width: 16px; height: 11px; }
+
+.sk-play {
+    width: 46px;
+    margin-left: 12px;
+}
+
+.sk-play svg { width: 17px; height: 21px; }
+.sk-next { margin-left: 8px; }
+
+/* right-hand icons */
+.sk-shuffle svg,
+.sk-mute svg,
+.sk-toggle-list svg { width: 17px; height: 17px; }
+
+.sk-vol-wrap,
+.sk-toggle-list { margin-left: 11px; }
+
+/* shuffle turns teal when on; the playlist button stays white like the original */
+.sk-shuffle.is-on { color: var(--sk-accent); }
+
+/* volume: icon toggles mute; slider pops up on hover (pointer devices only) */
+.sk-vol-wrap {
+    position: relative;
+    display: flex;
+}
+
+.sk-vol-pop {
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 12px 10px;
+    background: rgba(30, 30, 30, .95);
+    border-radius: 8px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, .4);
+    display: none;
+}
+
+.sk-vol-pop input {
+    writing-mode: vertical-lr;
+    direction: rtl;
+    width: 6px;
+    height: 90px;
+    accent-color: var(--sk-accent);
+    cursor: pointer;
+}
+
+@media (hover: hover) {
+    .sk-vol-wrap:hover .sk-vol-pop,
+    .sk-vol-wrap:focus-within .sk-vol-pop { display: block; }
+}
+
+/* gear menu: hidden unless the player is very narrow */
+.sk-more-wrap {
+    position: relative;
+    display: none;
+    margin-left: 11px;
+}
+
+.sk-more svg { width: 18px; height: 18px; }
+
+.sk-menu {
+    position: absolute;
+    right: -8px;
+    bottom: calc(100% + 4px);
+    z-index: 5;
+    min-width: 140px;
+    padding: 6px;
+    background: rgba(30, 30, 30, .97);
+    border-radius: 8px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, .45);
+    display: flex;
+    flex-direction: column;
+}
+
+.sk-menu[hidden] { display: none; }
+
+.sk-menu-item {
+    appearance: none;
+    border: 0;
+    background: none;
+    color: var(--sk-text);
+    font: inherit;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    text-align: left;
+}
+
+.sk-menu-item:hover,
+.sk-menu-item:focus-visible { background: rgba(255, 255, 255, .08); outline: none; }
+.sk-menu-item svg { width: 16px; height: 16px; fill: currentColor; flex-shrink: 0; }
+.sk-menu-item.is-on { color: var(--sk-accent); }
+
+/* ---------- playlist ---------- */
+.sk-list {
+    list-style: none;
+    padding: 0;
+    margin: 6px 16px 0 -6px;
+    display: flex;
+    flex-direction: column;
+}
+
+.sk-list[hidden] { display: none; }
+
+.sk-row {
+    display: grid;
+    grid-template-columns: 48px minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 12px;
+    padding: 6px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color .15s;
+}
+
+.sk-row:hover,
+.sk-row:focus-visible,
+.sk-row.is-active {
+    background: var(--sk-row);
+    outline: none;
+}
+
+.sk-thumb {
+    position: relative;
+    width: 48px;
+    height: 48px;
+    border-radius: 3px;
+    background: #2a2a2a center / cover no-repeat;
+    overflow: hidden;
+}
+
+.sk-thumb::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, .3) center / 16px no-repeat;
+    opacity: 0;
+    transition: opacity .15s;
+}
+
+.sk-row:hover .sk-thumb::after,
+.sk-row.is-active .sk-thumb::after { opacity: 1; }
+
+/* play / pause glyph on the thumbnail */
+.sk-row .sk-thumb::after,
+.sk-player:not(.is-playing) .sk-row.is-active .sk-thumb::after {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 17 21'%3E%3Cpath fill='white' d='M0 1.6C0 .4 1.3-.4 2.4.3l13.9 8.6c1 .6 1 2 0 2.6L2.4 20.1C1.3 20.8 0 20 0 18.8z'/%3E%3C/svg%3E");
+}
+
+.sk-player.is-playing .sk-row.is-active .sk-thumb::after {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 17 21'%3E%3Cpath fill='white' d='M1.5 0h4.2v21H1.5zM11.3 0h4.2v21h-4.2z'/%3E%3C/svg%3E");
+}
+
+.sk-row-title {
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 19.5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.sk-row-artist {
+    color: var(--sk-dim);
+    font-size: 13px;
+    line-height: 17px;
+    margin-top: 1px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.sk-row-dur {
+    font-size: 13px;
+    color: var(--sk-dim);
+    font-variant-numeric: tabular-nums;
+    padding-right: 6px;
+}
+
+/* ---------- compact: 441 - 599px ---------- */
+@container (max-width: 599px) {
+    .sk-inner { padding: 0 12px; }
+
+    .sk-now {
+        grid-template-columns: 48px minmax(0, 1fr);
+        column-gap: 12px;
+    }
+
+    .sk-cover { border-radius: 3px; }
+    .sk-main { display: contents; }
+
+    .sk-info {
+        grid-column: 2;
+        grid-row: 1;
+        align-self: center;
+    }
+
+    .sk-times,
+    .sk-bar,
+    .sk-controls { grid-column: 1 / -1; }
+
+    .sk-times { margin-top: 6px; }
+    .sk-bar { margin-top: 3px; }
+    .sk-controls { margin-top: 31px; }
+    .sk-list { margin-top: 10px; margin-right: 12px; }
+}
+
+/* ---------- stacked: 440px and down ---------- */
+@container (max-width: 440px) {
+    .sk-now {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .sk-cover { border-radius: 8px; }
+
+    .sk-main {
+        display: flex;
+        padding-top: 13px;
+    }
+
+    .sk-info { grid-column: auto; grid-row: auto; align-self: stretch; }
+
+    .sk-times { margin-top: 8px; }
+    .sk-bar { margin-top: 0; }
+    .sk-controls { margin-top: 20px; }
+    .sk-list { margin-top: 11px; }
+}
+
+/* ---------- very narrow: 280px and down — shuffle + volume move into a gear menu ---------- */
+@container (max-width: 280px) {
+    .sk-shuffle,
+    .sk-vol-wrap { display: none; }
+
+    .sk-more-wrap { display: flex; margin-left: 9px; }
+    .sk-toggle-list { margin-left: 9px; }
+}
