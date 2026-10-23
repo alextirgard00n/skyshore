@@ -57,7 +57,7 @@
     content: "";
     position: absolute;
     inset: 32%;
-    background: url("./media/logo/logo only white.png") center / contain no-repeat;
+    background: url("../media/logo/logo only white.png") center / contain no-repeat;
     opacity: .35;
 }
 

@@ -21,23 +21,28 @@ A single-page site built with plain HTML, CSS, and JavaScript. It has no framewo
 ## Project structure
 
 ```
-├── index.html          # The whole page
-├── style.css           # Site styles
-├── app.js              # Mobile menu and service card heights
-├── scroll.js           # Smooth scrolling, header, back-to-top button
-├── music-player.js     # Music player
-├── music-player.css    # Music player styles
-├── contact-form.js     # Contact form (EmailJS)
-├── CNAME               # Custom domain for GitHub Pages
+├── index.html              # The whole page
+├── CNAME                   # Custom domain for GitHub Pages
+├── README.md
+├── css/
+│   ├── style.css           # Site styles
+│   └── music-player.css    # Music player styles
+├── js/
+│   ├── app.js              # Mobile menu and service card heights
+│   ├── scroll.js           # Smooth scrolling, header, back-to-top button
+│   ├── music-player.js     # Music player
+│   └── contact-form.js     # Contact form (EmailJS)
 └── media/
-    ├── audio/          # Portfolio tracks (.mp3)
-    ├── covers/         # Cover art for each track (.jpg)
-    ├── backgrounds/    # Hero video, poster, and section backgrounds
-    ├── fonts/          # Gilroy (.woff2)
-    ├── logo/           # Logos and favicon
-    ├── svgs/ pngs/     # Icons
-    └── share-image.jpg # Link preview image (1200×630)
+    ├── audio/              # Portfolio tracks (.mp3)
+    ├── covers/             # Cover art for each track (.jpg)
+    ├── backgrounds/        # Hero video, poster, and section backgrounds
+    ├── fonts/              # Gilroy (.woff2)
+    ├── logo/               # Logos and favicon
+    ├── svgs/ pngs/         # Icons
+    └── share-image.jpg     # Link preview image (1200×630)
 ```
+
+Paths inside the CSS files point up a level (`../media/...`) because they're relative to the `css/` folder.
 
 ## Running locally
 
@@ -64,7 +69,7 @@ Tracks play in the order listed. File names are case-sensitive on GitHub Pages, 
 
 ## Contact form
 
-The form sends through [EmailJS](https://www.emailjs.com/). The service ID, template ID, and public key are at the top of `contact-form.js`. The form sends three fields: `name`, `email`, and `message`.
+The form sends through [EmailJS](https://www.emailjs.com/). The service ID, template ID, and public key are at the top of `js/contact-form.js`. The form sends three fields: `name`, `email`, and `message`.
 
 Spam protection uses a hidden field plus a minimum fill time, so there's no CAPTCHA.
 
@@ -74,7 +79,7 @@ Merging into `main` publishes the site automatically through GitHub Pages, usual
 
 ### Cache-busting
 
-The CSS and JS links in `index.html` end with a version number, like `style.css?v=3`. When you change one of those files, bump its number so returning visitors get the new version right away instead of a cached copy.
+The CSS and JS links in `index.html` end with a version number, like `css/style.css?v=4`. When you change one of those files, bump its number so returning visitors get the new version right away instead of a cached copy.
 
 ## Credits
 
