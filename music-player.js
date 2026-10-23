@@ -22,6 +22,7 @@
         shuffle: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17 3l4 4-4 4V8h-2.2l-3 3.5-1.3-1.5 3.4-4H17V3zM3 6h4.6l9.2 11H17v-3l4 4-4 4v-3h-1.1L6.7 8H3V6zm0 10h3.7l2.1-2.5 1.3 1.5L7.6 18H3v-2z"/></svg>',
         vol: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3a4.5 4.5 0 0 0-2.5-4v8a4.5 4.5 0 0 0 2.5-4zM14 3.2v2.1a7 7 0 0 1 0 13.4v2.1a9 9 0 0 0 0-17.6z"/></svg>',
         mute: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9v6h4l5 5V4L7 9H3zm16.6 3 2.1-2.1-1.4-1.4-2.1 2.1-2.1-2.1-1.4 1.4 2.1 2.1-2.1 2.1 1.4 1.4 2.1-2.1 2.1 2.1 1.4-1.4z"/></svg>',
+        gear: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19.4 13a7.6 7.6 0 0 0 0-2l2.1-1.6-2-3.5-2.5 1a7.4 7.4 0 0 0-1.7-1L15 3.3h-4l-.4 2.6a7.4 7.4 0 0 0-1.7 1l-2.5-1-2 3.5L6.6 11a7.6 7.6 0 0 0 0 2l-2.1 1.6 2 3.5 2.5-1a7.4 7.4 0 0 0 1.7 1l.3 2.6h4l.4-2.6a7.4 7.4 0 0 0 1.7-1l2.5 1 2-3.5zM12 15.5a3.5 3.5 0 1 1 0-7 3.5 3.5 0 0 1 0 7z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>',
         list: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h2v2H3zm4 0h14v2H7zM3 11h2v2H3zm4 0h14v2H7zM3 17h2v2H3zm4 0h14v2H7z"/></svg>',
     };
 
@@ -65,6 +66,13 @@
                             <button class="sk-btn sk-mute" aria-label="Mute">${ICONS.vol}</button>
                             <div class="sk-vol-pop"><input type="range" min="0" max="1" step="0.01" value="1" aria-label="Volume"></div>
                         </div>
+                        <div class="sk-more-wrap">
+                            <button class="sk-btn sk-more" aria-label="More options" aria-expanded="false">${ICONS.gear}</button>
+                            <div class="sk-menu" hidden>
+                                <button class="sk-menu-item sk-menu-shuffle" aria-pressed="false">${ICONS.shuffle}<span>Shuffle</span></button>
+                                <button class="sk-menu-item sk-menu-mute">${ICONS.vol}<span>Mute</span></button>
+                            </div>
+                        </div>
                         <button class="sk-btn sk-toggle-list is-on" aria-label="Hide playlist" aria-pressed="true">${ICONS.list}</button>
                     </div>
                 </div>
@@ -92,6 +100,8 @@
             bar: $(".sk-bar"), fill: $(".sk-bar-fill"), buffer: $(".sk-bar-buffer"),
             play: $(".sk-play"), prev: $(".sk-prev"), next: $(".sk-next"),
             shuffle: $(".sk-shuffle"), mute: $(".sk-mute"), vol: $(".sk-vol-pop input"),
+            more: $(".sk-more"), menu: $(".sk-menu"),
+            menuShuffle: $(".sk-menu-shuffle"), menuMute: $(".sk-menu-mute"),
             listBtn: $(".sk-toggle-list"), list: $(".sk-list"),
             rows: [...root.querySelectorAll(".sk-row")],
         };
@@ -189,6 +199,26 @@
             audio.muted = audio.volume === 0;
             setVolIcon();
         });
+
+        // gear menu (only visible on very narrow players): proxies shuffle + mute
+        const syncMenu = () => {
+            el.menuShuffle.classList.toggle("is-on", shuffle);
+            el.menuShuffle.setAttribute("aria-pressed", shuffle);
+            const off = audio.muted || audio.volume === 0;
+            el.menuMute.innerHTML = (off ? ICONS.mute : ICONS.vol) + `<span>${off ? "Unmute" : "Mute"}</span>`;
+        };
+        const closeMenu = () => { el.menu.hidden = true; el.more.setAttribute("aria-expanded", "false"); };
+        el.more.addEventListener("click", (e) => {
+            e.stopPropagation();
+            syncMenu();
+            el.menu.hidden = !el.menu.hidden;
+            el.more.setAttribute("aria-expanded", String(!el.menu.hidden));
+        });
+        el.menu.addEventListener("click", (e) => e.stopPropagation());
+        el.menuShuffle.addEventListener("click", () => { el.shuffle.click(); syncMenu(); });
+        el.menuMute.addEventListener("click", () => { el.mute.click(); syncMenu(); });
+        document.addEventListener("click", closeMenu);
+        document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeMenu(); });
 
         el.listBtn.addEventListener("click", () => {
             const show = el.list.hidden;
