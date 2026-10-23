@@ -5,25 +5,25 @@
 
 @font-face {
     font-family: gilroy-bold;
-    src: url(./media/fonts/Gilroy-Bold.woff2) format("woff2");
+    src: url(../media/fonts/Gilroy-Bold.woff2) format("woff2");
     font-display: swap;
 }
 
 @font-face {
     font-family: gilroy-regular;
-    src: url(./media/fonts/Gilroy-Regular.woff2) format("woff2");
+    src: url(../media/fonts/Gilroy-Regular.woff2) format("woff2");
     font-display: swap;
 }
 
 @font-face {
     font-family: gilroy-light;
-    src: url(./media/fonts/Gilroy-Light.woff2) format("woff2");
+    src: url(../media/fonts/Gilroy-Light.woff2) format("woff2");
     font-display: swap;
 }
 
 @font-face {
     font-family: sf-pro;
-    src: url(./media/fonts/SF-Pro-Text-Bold.woff);
+    src: url(../media/fonts/SF-Pro-Text-Bold.woff);
     font-display: swap;
 }
 
@@ -340,15 +340,15 @@ p {
 }
 
 /* .home-section::before {
-    background-image: url(./media/backgrounds/mixing-table.jpg);
+    background-image: url(../media/backgrounds/mixing-table.jpg);
 } */
 
 .myWork-section::before {
-    background-image: url(./media/backgrounds/microphone.jpg);
+    background-image: url(../media/backgrounds/microphone.jpg);
 }
 
 .about-section::before {
-    background-image: url(./media/backgrounds/skylene-wagewar-web.jpg);
+    background-image: url(../media/backgrounds/skylene-wagewar-web.jpg);
     filter: blur(4px);
     opacity: 0.63;
     /* background-size: 130% auto; */
