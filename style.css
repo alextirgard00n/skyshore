@@ -5,22 +5,26 @@
 
 @font-face {
     font-family: gilroy-bold;
-    src: url(./media/fonts/Gilroy-Bold.woff2);
+    src: url(./media/fonts/Gilroy-Bold.woff2) format("woff2");
+    font-display: swap;
 }
 
 @font-face {
     font-family: gilroy-regular;
-    src: url(./media/fonts/Gilroy-Regular.woff2);
+    src: url(./media/fonts/Gilroy-Regular.woff2) format("woff2");
+    font-display: swap;
 }
 
 @font-face {
     font-family: gilroy-light;
-    src: url(./media/fonts/Gilroy-Light.ttf);
+    src: url(./media/fonts/Gilroy-Light.woff2) format("woff2");
+    font-display: swap;
 }
 
 @font-face {
     font-family: sf-pro;
     src: url(./media/fonts/SF-Pro-Text-Bold.woff);
+    font-display: swap;
 }
 
 body {
@@ -660,6 +664,15 @@ footer>p>a {
     transition: opacity .3s ease;
     font-size: 24px;
     color: #E3E3E3;
+    display: grid;
+    place-items: center;
+}
+
+.scrollContainer svg {
+    width: 22px;
+    height: 22px;
+    fill: currentColor;
+    pointer-events: none;
 }
 
 .scrollContainer:hover {

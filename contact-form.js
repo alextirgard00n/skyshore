@@ -6,12 +6,16 @@
 (function () {
     "use strict";
 
+    const PUBLIC_KEY = "n62Zq_2oUHH99CvCd";
     const SERVICE_ID = "service_lirdqis";
     const TEMPLATE_ID = "template_l6qeefq";
     const MIN_FILL_MS = 3000; // bots submit instantly; people take longer than 3s
 
     const form = document.getElementById("contactForm");
     if (!form) return;
+
+    // EmailJS loads just before this file (deferred); it may be missing if a blocker stopped it.
+    if (window.emailjs) window.emailjs.init(PUBLIC_KEY);
 
     const button = form.querySelector(".submitBtn");
     const status = form.querySelector(".form-status");
