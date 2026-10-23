@@ -2,14 +2,15 @@
 
 .sk-player {
     --sk-text: #f3f3f3;
-    --sk-dim: rgba(243, 243, 243, .62);
+    --sk-dim: rgba(243, 243, 243, .7);
     --sk-faint: rgba(243, 243, 243, .3);
-    --sk-track: rgba(243, 243, 243, .22);
-    --sk-row: rgba(255, 255, 255, .07);
+    --sk-track: rgba(255, 255, 255, .2);
+    --sk-buffer: rgba(255, 255, 255, .25);
+    --sk-row: rgba(255, 255, 255, .06);
     --sk-accent: #24B4BD;
 
     width: 93%;
-    max-width: 1200px;
+    max-width: 1160px;
     margin: 0 auto;
     box-sizing: border-box;
     color: var(--sk-text);
@@ -23,26 +24,21 @@
     margin: 0;
 }
 
-/* ---------- now playing ---------- */
+/* ---------- now playing (desktop sizes measured from the Elfsight widget) ---------- */
 .sk-now {
     display: grid;
-    grid-template-columns: minmax(0, 360px) minmax(0, 1fr);
-    gap: 40px;
-    align-items: end;
+    grid-template-columns: 168px minmax(0, 1fr);
+    gap: 20px;
+    align-items: stretch;
 }
 
 .sk-cover {
     width: 100%;
     aspect-ratio: 1 / 1;
-    border-radius: 6px;
-    background: #222 center / cover no-repeat;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, .45);
+    border-radius: 4px;
+    background: #2a2a2a center / cover no-repeat;
     position: relative;
     overflow: hidden;
-}
-
-.sk-cover.sk-cover--empty {
-    background-image: linear-gradient(135deg, #1a1a1a, #2d2d2d);
 }
 
 .sk-cover.sk-cover--empty::after {
@@ -50,18 +46,20 @@
     position: absolute;
     inset: 32%;
     background: url("./media/logo/logo only white.png") center / contain no-repeat;
-    opacity: .45;
+    opacity: .35;
 }
 
 .sk-main {
     min-width: 0;
     display: flex;
     flex-direction: column;
+    padding-block: 16px 14px;
 }
 
 .sk-title {
-    font-size: 24px;
-    line-height: 1.25;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.3;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -69,24 +67,23 @@
 
 .sk-artist {
     color: var(--sk-dim);
-    font-size: 17px;
-    margin-top: 4px;
+    font-size: 13px;
+    margin-top: 2px;
 }
 
 /* ---------- progress ---------- */
 .sk-times {
     display: flex;
     justify-content: space-between;
-    margin-top: 22px;
-    font-size: 14px;
+    margin-top: auto;
+    font-size: 12px;
     color: var(--sk-dim);
     font-variant-numeric: tabular-nums;
 }
 
 .sk-bar {
     position: relative;
-    height: 18px;
-    margin-top: 2px;
+    height: 14px;
     cursor: pointer;
     touch-action: none;
     display: flex;
@@ -107,10 +104,9 @@
     position: absolute;
     inset: 0 auto 0 0;
     width: 0;
-    border-radius: 2px;
 }
 
-.sk-bar-buffer { background: var(--sk-track); }
+.sk-bar-buffer { background: var(--sk-buffer); }
 .sk-bar-fill { background: var(--sk-accent); }
 
 .sk-bar:focus-visible {
@@ -123,8 +119,10 @@
 .sk-controls {
     display: flex;
     align-items: center;
-    gap: 8px;
-    margin-top: 26px;
+    gap: 4px;
+    margin-top: 16px;
+    margin-left: -6px;
+    margin-right: -6px;
 }
 
 .sk-spacer { flex: 1; }
@@ -137,14 +135,14 @@
     cursor: pointer;
     display: grid;
     place-items: center;
-    width: 44px;
-    height: 44px;
+    width: 32px;
+    height: 32px;
     border-radius: 50%;
     padding: 0;
-    transition: color .2s, opacity .2s, transform .1s;
+    transition: opacity .2s, transform .1s;
 }
 
-.sk-btn:hover { opacity: .8; }
+.sk-btn:hover { opacity: .75; }
 .sk-btn:active { transform: scale(.92); }
 .sk-btn:disabled { color: var(--sk-faint); cursor: default; }
 .sk-btn:disabled:hover { opacity: 1; }
@@ -154,18 +152,14 @@
     outline-offset: 1px;
 }
 
-.sk-btn svg {
-    width: 24px;
-    height: 24px;
-    fill: currentColor;
-}
+.sk-btn svg { width: 18px; height: 18px; fill: currentColor; }
+.sk-prev svg, .sk-next svg { width: 20px; height: 20px; }
+.sk-play { width: 44px; height: 40px; }
+.sk-play svg { width: 26px; height: 26px; }
+.sk-shuffle svg, .sk-mute svg, .sk-toggle-list svg { width: 17px; height: 17px; }
 
-.sk-play svg {
-    width: 34px;
-    height: 34px;
-}
-
-.sk-btn.is-on { color: var(--sk-accent); }
+/* shuffle turns teal when on; the playlist button stays white like the original */
+.sk-shuffle.is-on { color: var(--sk-accent); }
 
 /* volume: icon toggles mute; slider pops up on hover (pointer devices only) */
 .sk-vol-wrap {
@@ -203,10 +197,10 @@
 .sk-list {
     list-style: none;
     padding: 0;
-    margin-top: 22px;
+    margin-top: 6px;
+    margin-left: -6px;
     display: flex;
     flex-direction: column;
-    gap: 4px;
 }
 
 .sk-list[hidden] { display: none; }
@@ -215,9 +209,9 @@
     display: grid;
     grid-template-columns: 48px minmax(0, 1fr) auto;
     align-items: center;
-    gap: 16px;
-    padding: 6px 12px 6px 6px;
-    border-radius: 8px;
+    gap: 12px;
+    padding: 6px;
+    border-radius: 6px;
     cursor: pointer;
     transition: background-color .15s;
 }
@@ -233,7 +227,7 @@
     position: relative;
     width: 48px;
     height: 48px;
-    border-radius: 4px;
+    border-radius: 3px;
     background: #2a2a2a center / cover no-repeat;
     overflow: hidden;
 }
@@ -242,7 +236,7 @@
     content: "";
     position: absolute;
     inset: 0;
-    background: rgba(0, 0, 0, .35) center / 18px no-repeat;
+    background: rgba(0, 0, 0, .3) center / 16px no-repeat;
     opacity: 0;
     transition: opacity .15s;
 }
@@ -261,7 +255,9 @@
 }
 
 .sk-row-title {
-    font-size: 17px;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.3;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -269,31 +265,36 @@
 
 .sk-row-artist {
     color: var(--sk-dim);
-    font-size: 15px;
-    margin-top: 3px;
+    font-size: 13px;
+    margin-top: 1px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
 .sk-row-dur {
-    font-size: 15px;
+    font-size: 13px;
     color: var(--sk-dim);
     font-variant-numeric: tabular-nums;
+    padding-right: 6px;
 }
 
 /* ---------- phone: stacked, full-width cover like the Elfsight layout ---------- */
 @media (max-width: 768px) {
     .sk-now {
         grid-template-columns: 1fr;
-        gap: 18px;
+        gap: 14px;
     }
 
-    .sk-cover { max-width: 100%; }
-    .sk-title { font-size: 19px; }
-    .sk-artist { font-size: 15px; margin-top: 2px; }
-    .sk-times { margin-top: 14px; font-size: 13px; }
-    .sk-controls { margin-top: 18px; }
-    .sk-row-title { font-size: 16px; }
+    .sk-main { padding-block: 0; }
+    .sk-title { font-size: 19px; font-weight: normal; }
+    .sk-artist { font-size: 15px; }
+    .sk-times { margin-top: 12px; font-size: 13px; }
+    .sk-controls { margin-top: 14px; gap: 10px; }
+    .sk-btn { width: 40px; height: 40px; }
+    .sk-btn svg { width: 22px; height: 22px; }
+    .sk-play svg { width: 32px; height: 32px; }
+    .sk-row-title { font-size: 16px; font-weight: normal; }
     .sk-row-artist { font-size: 14px; }
+    .sk-row-dur { font-size: 14px; }
 }
