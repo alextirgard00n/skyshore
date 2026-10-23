@@ -1,4 +1,11 @@
-/* ===== Skyshore music player (self-hosted replacement for the Elfsight widget) ===== */
+/* ===== Skyshore music player (self-hosted replacement for the Elfsight widget) =====
+ *
+ * Three layouts, switched on the player's own width (like Elfsight does):
+ *   600px and up  -> 168px cover beside the controls
+ *   441 - 599px   -> compact: 48px cover beside the title, controls full width
+ *   440px and down -> stacked: full-width cover on top
+ * Measurements were taken from the Elfsight widget on skyshorerecordings.com.
+ */
 
 .sk-player {
     --sk-text: #f3f3f3;
@@ -9,8 +16,9 @@
     --sk-row: rgba(255, 255, 255, .06);
     --sk-accent: #24B4BD;
 
+    container-type: inline-size;
     width: 93%;
-    max-width: 1160px;
+    max-width: 1200px;
     margin: 0 auto;
     box-sizing: border-box;
     color: var(--sk-text);
@@ -24,12 +32,16 @@
     margin: 0;
 }
 
-/* ---------- now playing (desktop sizes measured from the Elfsight widget) ---------- */
+.sk-inner {
+    padding: 0 20px;
+}
+
+/* ---------- now playing ---------- */
 .sk-now {
     display: grid;
     grid-template-columns: 168px minmax(0, 1fr);
-    gap: 20px;
-    align-items: stretch;
+    column-gap: 20px;
+    align-items: start;
 }
 
 .sk-cover {
@@ -53,13 +65,15 @@
     min-width: 0;
     display: flex;
     flex-direction: column;
-    padding-block: 16px 14px;
+    padding-top: 15px;
 }
+
+.sk-info { min-width: 0; }
 
 .sk-title {
     font-size: 15px;
     font-weight: 600;
-    line-height: 1.3;
+    line-height: 19.5px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -68,26 +82,38 @@
 .sk-artist {
     color: var(--sk-dim);
     font-size: 13px;
+    line-height: 17px;
     margin-top: 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 /* ---------- progress ---------- */
 .sk-times {
     display: flex;
     justify-content: space-between;
-    margin-top: auto;
+    margin-top: 25px;
     font-size: 12px;
+    line-height: 14px;
     color: var(--sk-dim);
     font-variant-numeric: tabular-nums;
 }
 
 .sk-bar {
     position: relative;
-    height: 14px;
+    height: 6px;
     cursor: pointer;
     touch-action: none;
     display: flex;
     align-items: center;
+}
+
+/* bigger invisible hit area for the thin bar */
+.sk-bar::before {
+    content: "";
+    position: absolute;
+    inset: -8px 0;
 }
 
 .sk-bar-track {
@@ -111,7 +137,7 @@
 
 .sk-bar:focus-visible {
     outline: 2px solid var(--sk-accent);
-    outline-offset: 2px;
+    outline-offset: 4px;
     border-radius: 4px;
 }
 
@@ -119,10 +145,8 @@
 .sk-controls {
     display: flex;
     align-items: center;
-    gap: 4px;
     margin-top: 16px;
-    margin-left: -6px;
-    margin-right: -6px;
+    height: 40px;
 }
 
 .sk-spacer { flex: 1; }
@@ -135,10 +159,10 @@
     cursor: pointer;
     display: grid;
     place-items: center;
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
+    width: 24px;
+    height: 40px;
     padding: 0;
+    border-radius: 4px;
     transition: opacity .2s, transform .1s;
 }
 
@@ -152,11 +176,27 @@
     outline-offset: 1px;
 }
 
-.sk-btn svg { width: 18px; height: 18px; fill: currentColor; }
-.sk-prev svg, .sk-next svg { width: 20px; height: 20px; }
-.sk-play { width: 44px; height: 40px; }
-.sk-play svg { width: 26px; height: 26px; }
-.sk-shuffle svg, .sk-mute svg, .sk-toggle-list svg { width: 17px; height: 17px; }
+.sk-btn svg { fill: currentColor; display: block; }
+
+/* transport: same shapes and spacing as the Elfsight player */
+.sk-prev svg,
+.sk-next svg { width: 16px; height: 11px; }
+
+.sk-play {
+    width: 46px;
+    margin-left: 12px;
+}
+
+.sk-play svg { width: 17px; height: 21px; }
+.sk-next { margin-left: 8px; }
+
+/* right-hand icons */
+.sk-shuffle svg,
+.sk-mute svg,
+.sk-toggle-list svg { width: 17px; height: 17px; }
+
+.sk-vol-wrap,
+.sk-toggle-list { margin-left: 11px; }
 
 /* shuffle turns teal when on; the playlist button stays white like the original */
 .sk-shuffle.is-on { color: var(--sk-accent); }
@@ -197,8 +237,7 @@
 .sk-list {
     list-style: none;
     padding: 0;
-    margin-top: 6px;
-    margin-left: -6px;
+    margin: 6px 16px 0 -6px;
     display: flex;
     flex-direction: column;
 }
@@ -247,17 +286,17 @@
 /* play / pause glyph on the thumbnail */
 .sk-row .sk-thumb::after,
 .sk-player:not(.is-playing) .sk-row.is-active .sk-thumb::after {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='white' d='M7 4.5v15a1 1 0 0 0 1.5.87l12-7.5a1 1 0 0 0 0-1.74l-12-7.5A1 1 0 0 0 7 4.5z'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 17 21'%3E%3Cpath fill='white' d='M0 1.6C0 .4 1.3-.4 2.4.3l13.9 8.6c1 .6 1 2 0 2.6L2.4 20.1C1.3 20.8 0 20 0 18.8z'/%3E%3C/svg%3E");
 }
 
 .sk-player.is-playing .sk-row.is-active .sk-thumb::after {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='white' d='M6 4h4.5v16H6zM13.5 4H18v16h-4.5z'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 17 21'%3E%3Cpath fill='white' d='M1.5 0h4.2v21H1.5zM11.3 0h4.2v21h-4.2z'/%3E%3C/svg%3E");
 }
 
 .sk-row-title {
     font-size: 15px;
     font-weight: 600;
-    line-height: 1.3;
+    line-height: 19.5px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -266,6 +305,7 @@
 .sk-row-artist {
     color: var(--sk-dim);
     font-size: 13px;
+    line-height: 17px;
     margin-top: 1px;
     white-space: nowrap;
     overflow: hidden;
@@ -279,22 +319,51 @@
     padding-right: 6px;
 }
 
-/* ---------- phone: stacked, full-width cover like the Elfsight layout ---------- */
-@media (max-width: 768px) {
+/* ---------- compact: 441 - 599px ---------- */
+@container (max-width: 599px) {
+    .sk-inner { padding: 0 12px; }
+
     .sk-now {
-        grid-template-columns: 1fr;
-        gap: 14px;
+        grid-template-columns: 48px minmax(0, 1fr);
+        column-gap: 12px;
     }
 
-    .sk-main { padding-block: 0; }
-    .sk-title { font-size: 19px; font-weight: normal; }
-    .sk-artist { font-size: 15px; }
-    .sk-times { margin-top: 12px; font-size: 13px; }
-    .sk-controls { margin-top: 14px; gap: 10px; }
-    .sk-btn { width: 40px; height: 40px; }
-    .sk-btn svg { width: 22px; height: 22px; }
-    .sk-play svg { width: 32px; height: 32px; }
-    .sk-row-title { font-size: 16px; font-weight: normal; }
-    .sk-row-artist { font-size: 14px; }
-    .sk-row-dur { font-size: 14px; }
+    .sk-cover { border-radius: 3px; }
+    .sk-main { display: contents; }
+
+    .sk-info {
+        grid-column: 2;
+        grid-row: 1;
+        align-self: center;
+    }
+
+    .sk-times,
+    .sk-bar,
+    .sk-controls { grid-column: 1 / -1; }
+
+    .sk-times { margin-top: 6px; }
+    .sk-bar { margin-top: 3px; }
+    .sk-controls { margin-top: 31px; }
+    .sk-list { margin-top: 10px; margin-right: 12px; }
+}
+
+/* ---------- stacked: 440px and down ---------- */
+@container (max-width: 440px) {
+    .sk-now {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .sk-cover { border-radius: 8px; }
+
+    .sk-main {
+        display: flex;
+        padding-top: 13px;
+    }
+
+    .sk-info { grid-column: auto; grid-row: auto; align-self: stretch; }
+
+    .sk-times { margin-top: 8px; }
+    .sk-bar { margin-top: 0; }
+    .sk-controls { margin-top: 20px; }
+    .sk-list { margin-top: 11px; }
 }

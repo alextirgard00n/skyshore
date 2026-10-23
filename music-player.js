@@ -15,10 +15,10 @@
     "use strict";
 
     const ICONS = {
-        play: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15a1 1 0 0 0 1.5.87l12-7.5a1 1 0 0 0 0-1.74l-12-7.5A1 1 0 0 0 7 4.5z"/></svg>',
-        pause: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4h4.5v16H6zM13.5 4H18v16h-4.5z"/></svg>',
-        prev: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11.5 6.2v11.6L3.3 12zM21 6.2v11.6L12.8 12z"/></svg>',
-        next: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.5 6.2v11.6l8.2-5.8zM3 6.2v11.6l8.2-5.8z"/></svg>',
+        play: '<svg viewBox="0 0 17 21" aria-hidden="true"><path d="M0 1.6C0 .4 1.3-.4 2.4.3l13.9 8.6c1 .6 1 2 0 2.6L2.4 20.1C1.3 20.8 0 20 0 18.8z"/></svg>',
+        pause: '<svg viewBox="0 0 17 21" aria-hidden="true"><path d="M1.5 0h4.2v21H1.5zM11.3 0h4.2v21h-4.2z"/></svg>',
+        prev: '<svg viewBox="0 0 16 11" aria-hidden="true" style="transform:scaleX(-1)"><path d="M0 .9v9.2c0 .7.8 1.1 1.4.7l6.2-4.6c.5-.4.5-1.1 0-1.4L1.4.2C.8-.2 0 .2 0 .9zm8 0v9.2c0 .7.8 1.1 1.4.7l6.2-4.6c.5-.4.5-1.1 0-1.4L9.4.2C8.8-.2 8 .2 8 .9z"/></svg>',
+        next: '<svg viewBox="0 0 16 11" aria-hidden="true"><path d="M0 .9v9.2c0 .7.8 1.1 1.4.7l6.2-4.6c.5-.4.5-1.1 0-1.4L1.4.2C.8-.2 0 .2 0 .9zm8 0v9.2c0 .7.8 1.1 1.4.7l6.2-4.6c.5-.4.5-1.1 0-1.4L9.4.2C8.8-.2 8 .2 8 .9z"/></svg>',
         shuffle: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17 3l4 4-4 4V8h-2.2l-3 3.5-1.3-1.5 3.4-4H17V3zM3 6h4.6l9.2 11H17v-3l4 4-4 4v-3h-1.1L6.7 8H3V6zm0 10h3.7l2.1-2.5 1.3 1.5L7.6 18H3v-2z"/></svg>',
         vol: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3a4.5 4.5 0 0 0-2.5-4v8a4.5 4.5 0 0 0 2.5-4zM14 3.2v2.1a7 7 0 0 1 0 13.4v2.1a9 9 0 0 0 0-17.6z"/></svg>',
         mute: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9v6h4l5 5V4L7 9H3zm16.6 3 2.1-2.1-1.4-1.4-2.1 2.1-2.1-2.1-1.4 1.4 2.1 2.1-2.1 2.1 1.4 1.4 2.1-2.1 2.1 2.1 1.4-1.4z"/></svg>',
@@ -42,12 +42,14 @@
         if (!tracks.length) return;
 
         root.classList.add("sk-player");
-        root.innerHTML = `
+        root.innerHTML = `<div class="sk-inner">
             <div class="sk-now">
                 <div class="sk-cover" role="img"></div>
                 <div class="sk-main">
-                    <div class="sk-title"></div>
-                    <div class="sk-artist"></div>
+                    <div class="sk-info">
+                        <div class="sk-title"></div>
+                        <div class="sk-artist"></div>
+                    </div>
                     <div class="sk-times"><span class="sk-cur">0:00</span><span class="sk-dur">0:00</span></div>
                     <div class="sk-bar" role="slider" tabindex="0" aria-label="Seek"
                          aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
@@ -77,7 +79,8 @@
                     </span>
                     <span class="sk-row-dur"></span>
                 </li>`).join("")}
-            </ol>`;
+            </ol>
+        </div>`;
 
         const $ = (s) => root.querySelector(s);
         const audio = new Audio();
